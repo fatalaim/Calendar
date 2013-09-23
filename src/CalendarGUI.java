@@ -18,8 +18,11 @@ public class CalendarGUI extends JFrame{
 		this.setTitle("Calendar");
 		this.setSize(750, 750);
 		this.setVisible(true);
+		CreateGUI(Calendar.getInstance().get(Calendar.MONTH));
+	}
 
-
+	public void CreateGUI(int monthCreate)
+	{
 		JPanel calendar = new JPanel();
 		calendar.setLayout(new GridLayout(6,7));
 		JButton[][] days = new JButton[6][7];
@@ -118,11 +121,11 @@ public class CalendarGUI extends JFrame{
 		this.add(actions, BorderLayout.SOUTH);
 		this.add(calendar, BorderLayout.CENTER);
 
-		Listener add = new Listener(1);
-		Listener edit = new Listener(2);
-		Listener delete = new Listener(3);
-		Listener next = new Listener(4);
-		Listener prev = new Listener(5);
+		Listener add = new Listener(1,this);
+		Listener edit = new Listener(2,this);
+		Listener delete = new Listener(3,this);
+		Listener next = new Listener(4,this);
+		Listener prev = new Listener(5,this);
 
 		buttons[0].addActionListener(prev);
 		buttons[2].addActionListener(add);
@@ -131,39 +134,6 @@ public class CalendarGUI extends JFrame{
 		buttons[6].addActionListener(next);
 	}
 
-	public CalendarGUI(int i)
-	{
-		switch(i)
-		{
-		case 1:
-			this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			this.setTitle("Add Event");
-			this.setSize(250, 250);
-			this.setVisible(true);
-			this.setLayout(new GridLayout(10,2));
-			JComponent[][] inputs = new JComponent[10][2];
-			String[] labels = {"Name:","Day:","Month:","Year:","Location:","Time(hour):","Time(minute):","Duration:","Description:"};
-			for(int j = 0; j < 9; j++){
-				for(int k = 0; k <2; k++){
-					if(k == 0){
-						inputs[j][k] = new JLabel(labels[j]);
-					}
-					else{
-						inputs[j][k] = new JTextField(30);
-					}
-					this.add(inputs[j][k]);
-				}
-			}
-			JButton confirmEvent = new JButton("Add");
-			JButton cancelEvent = new JButton("Cancel");
-			this.add(confirmEvent);
-			this.add(cancelEvent);
-			
-			break;
-		}
-
-
-	}
 	public static void main(String[] args) {
 		new CalendarGUI();
 
