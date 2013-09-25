@@ -23,26 +23,23 @@ public class CalendarGUI extends JFrame{
 
 	public void CreateGUI(int monthCreate)
 	{
-		Calendar rightNow = Calendar.getInstance();
-		int day = rightNow.get(Calendar.DAY_OF_MONTH);
-		int month = rightNow.get(Calendar.MONTH);
-		month++;
-		int year = rightNow.get(Calendar.YEAR);
-		int dayOfWeek = rightNow.get(Calendar.DAY_OF_WEEK);
 		JPanel calendar = new JPanel();
 		calendar.setLayout(new GridLayout(6,7));
 		JButton[][] days = new JButton[6][7];
-		Listener[][] listener = new Listener[6][7];
 		for(int i = 0; i < 6; i++)
 		{
 			for(int j = 0; j < 7; j++)
 			{
 				days[i][j] = new JButton();
 				calendar.add(days[i][j]);
-				listener[i][j] = new Listener(8, days[i][j], month, year);
-				days[i][j].addActionListener(listener[i][j]);
 			}
 		}
+
+		Calendar rightNow = Calendar.getInstance();
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		int month = rightNow.get(Calendar.MONTH);
+		int year = rightNow.get(Calendar.YEAR);
+		int dayOfWeek = rightNow.get(Calendar.DAY_OF_WEEK);
 
 		int[] MonthDays = {31,28,31,30,31,30,31,31,30,31,30,31};
 		int monthStart = (Math.abs(dayOfWeek - day) % 7);
@@ -143,4 +140,3 @@ public class CalendarGUI extends JFrame{
 	}
 
 }
-

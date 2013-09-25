@@ -51,6 +51,7 @@ public class CalendarAddGUI extends JFrame{
 	public int GetMonth()
 	{
 		JTextField j = (JTextField)inputs[2][1];
+		System.out.println(j.getText());
 		return Integer.parseInt(j.getText());
 	}
 	
@@ -96,4 +97,3 @@ public class CalendarAddGUI extends JFrame{
 		return Float.parseFloat(j.getText());
 	}
 }
-

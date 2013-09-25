@@ -1,6 +1,5 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
 
 public class Listener implements ActionListener{
 	
@@ -8,9 +7,6 @@ public class Listener implements ActionListener{
 	private CalendarData data = new CalendarData();
 	private CalendarGUI gui;
 	private CalendarAddGUI addGui;
-	private JButton dayGui;
-	private int month;
-	private int year;
 	
 	public Listener(int button, CalendarGUI GUI)
 	{
@@ -22,14 +18,6 @@ public class Listener implements ActionListener{
 	{
 		num = button;
 		addGui = GUI;
-	}
-	
-	public Listener(int button, JButton day, int Month, int Year)
-	{
-		num = button;
-		dayGui = day;
-		month = Month;
-		year = Year;
 	}
 	
 	public void actionPerformed(ActionEvent e)
@@ -64,11 +52,7 @@ public class Listener implements ActionListener{
 			case 7: //cancel add
 				addGui.setVisible(false);
 				break;
-			case 8: //display events
-				new CalendarEventDisplay(Integer.parseInt(dayGui.getText()), month, year, data);
-				break;
 		}
 	}
 
 }
-
