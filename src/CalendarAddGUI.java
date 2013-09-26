@@ -10,8 +10,11 @@ import javax.swing.JTextField;
 public class CalendarAddGUI extends JFrame{
 
 	private JComponent[][] inputs;
-	public CalendarAddGUI()
+	private CalendarData data;
+	
+	public CalendarAddGUI(CalendarData Data)
 	{
+		data = Data;
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Add Event");
 		this.setSize(250, 250);
@@ -35,8 +38,8 @@ public class CalendarAddGUI extends JFrame{
 		this.add(confirmEvent);
 		this.add(cancelEvent);
 
-		Listener add = new Listener(6,this);
-		Listener cancel = new Listener(7,this);
+		Listener add = new Listener(6,this,data);
+		Listener cancel = new Listener(7,this,data);
 
 		confirmEvent.addActionListener(add);
 		cancelEvent.addActionListener(cancel);
