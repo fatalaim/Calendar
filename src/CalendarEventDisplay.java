@@ -10,10 +10,10 @@ public class CalendarEventDisplay extends JFrame{
 		this.setSize(250, 250);
 		this.setVisible(true);
 				
-		int count = Data.GetCount(day, month, year);
+		int count = Data.GetCount(day, month + 1, year);
 		this.setLayout(new GridLayout(count, 1));
 		JButton[] events = new JButton[count];
-		Event[] e = Data.GetEvents(day, month, year);
+		Event[] e = Data.GetEvents(day, month + 1, year);
 		for(int i = 0; i < count; i++)
 		{
 			events[i] = new JButton();
@@ -22,5 +22,6 @@ public class CalendarEventDisplay extends JFrame{
 			events[i].setHorizontalAlignment(SwingConstants.CENTER); 
 			this.add(events[i]);
 		}
+		this.setVisible(true);
 	}
 }
