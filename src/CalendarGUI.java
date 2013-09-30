@@ -47,7 +47,7 @@ public class CalendarGUI extends JFrame{
 			{
 				days[i][j] = new JButton();
 				calendar.add(days[i][j]);
-				listener[i][j] = new Listener(8, days[i][j], monthCreate, yearCreate, data);
+				listener[i][j] = new Listener(800, days[i][j], monthCreate, yearCreate, data);
 				days[i][j].addActionListener(listener[i][j]);
 			}
 		}
@@ -86,9 +86,7 @@ public class CalendarGUI extends JFrame{
 			actions.add(buttons[i]);
 		}
 		buttons[0].setText("Prev");
-		buttons[2].setText("Add Event");
-		buttons[3].setText("Edit Event");
-		buttons[4].setText("Delete Event");
+		buttons[3].setText("Add Event");
 		buttons[6].setText("Next");
 
 		JPanel Name = new JPanel();
@@ -142,16 +140,12 @@ public class CalendarGUI extends JFrame{
 		this.add(actions, BorderLayout.SOUTH);
 		this.add(calendar, BorderLayout.CENTER);
 
-		Listener add = new Listener(1,this,data);
-		Listener edit = new Listener(2,this,data);
-		Listener delete = new Listener(3,this,data);
-		Listener next = new Listener(4,this,data);
-		Listener prev = new Listener(5,this,data);
+		Listener add = new Listener(100,this,data);
+		Listener next = new Listener(400,this,data);
+		Listener prev = new Listener(500,this,data);
 
 		buttons[0].addActionListener(prev);
-		buttons[2].addActionListener(add);
-		buttons[3].addActionListener(edit);
-		buttons[4].addActionListener(delete);
+		buttons[3].addActionListener(add);
 		buttons[6].addActionListener(next);
 		this.setVisible(true);
 	}

@@ -10,6 +10,7 @@ public class Event {
 	private float duration;
 	private String desc;
 	private String name;
+	private int guid;
 	
 	public void SetDay(int Day)
 	{
@@ -99,5 +100,15 @@ public class Event {
 	public float GetDuration()
 	{
 		return duration;
+	}
+	
+	public int GetGUID()
+	{
+		return guid;
+	}
+	
+	public void SetGUID(int GUID)
+	{
+		guid = GUID;
 	}
 }

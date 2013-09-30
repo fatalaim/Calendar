@@ -37,8 +37,8 @@ public class CalendarAddGUI extends JFrame{
 		this.add(confirmEvent);
 		this.add(cancelEvent);
 
-		Listener add = new Listener(6,this,data);
-		Listener cancel = new Listener(7,this,data);
+		Listener add = new Listener(600,this,data);
+		Listener cancel = new Listener(700,this,data);
 
 		confirmEvent.addActionListener(add);
 		cancelEvent.addActionListener(cancel);

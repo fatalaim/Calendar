@@ -53,7 +53,7 @@ public class CalendarData {
 			System.out.println("VendorError: " + ex.getErrorCode());
 		}
 	}
-	
+
 	public int GetCount(int day, int month, int year)
 	{
 		Statement stmt = null;
@@ -62,9 +62,9 @@ public class CalendarData {
 		try
 		{
 			stmt = con.createStatement();
-			
+
 			rs = stmt.executeQuery(selectSQL);
-			
+
 			rs.last();
 			return rs.getRow();
 		}
@@ -76,7 +76,7 @@ public class CalendarData {
 		}
 		return 0;
 	}
-	
+
 	public Event[] GetEvents(int day, int month, int year)
 	{
 		Statement stmt = null;
@@ -85,9 +85,9 @@ public class CalendarData {
 		try
 		{
 			stmt = con.createStatement();
-			
+
 			rs = stmt.executeQuery(selectSQL);
-			
+
 			rs.last();
 			int count = rs.getRow();
 			rs.beforeFirst();
@@ -96,6 +96,7 @@ public class CalendarData {
 			while(rs.next())
 			{
 				e[i] = new Event();
+				e[i].SetGUID(rs.getInt(1));
 				e[i].SetName(rs.getString(2));
 				e[i].SetLocation(rs.getString(3));
 				e[i].SetDesc(rs.getString(4));
@@ -116,6 +117,23 @@ public class CalendarData {
 			System.out.println("VendorError: " + ex.getErrorCode());
 		}
 		return null;
+	}
+
+	public int UpdateEvent(Event event)
+	{
+		String updateSQL = "";
+		try
+		{
+			PreparedStatement preparedStatement = con.prepareStatement(updateSQL);
+		}
+		catch(SQLException ex)
+		{
+			System.out.println("SQLException: " + ex.getMessage());
+			System.out.println("SQLState: " + ex.getSQLState());
+			System.out.println("VendorError: " + ex.getErrorCode());
+			return 0;
+		}
+		return 1;
 	}
 }
 
