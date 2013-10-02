@@ -1,11 +1,5 @@
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import java.awt.*;
+import javax.swing.*;
 
 import java.util.Calendar;
 
@@ -18,6 +12,21 @@ public class CalendarGUI extends JFrame{
 	
 	public CalendarGUI(CalendarData Data)
 	{
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		data = Data;
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Calendar");
@@ -66,6 +75,10 @@ public class CalendarGUI extends JFrame{
 			{
 				if(r == 0 && start == false)
 				{
+					for(;c < monthStart; c++)
+					{
+						
+					}
 					c = monthStart;
 					start = true;
 				}
