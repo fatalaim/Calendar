@@ -9,7 +9,7 @@ public class CalendarEditGUI extends JFrame{
 	private JTextField[] fields = new JTextField[9];
 	private int guid;
 	
-	public CalendarEditGUI(CalendarData Data, Event event)
+	public CalendarEditGUI(CalendarData Data, Event event, CalendarEventDisplay display, int day, int month, int year)
 	{
 		data = Data;
 		guid = event.GetGUID();
@@ -67,11 +67,11 @@ public class CalendarEditGUI extends JFrame{
 		this.add(EditEvent);
 		this.add(DeleteEvent);
 
-		Listener add = new Listener(201,this,data);
-		Listener cancel = new Listener(300,this,data);
+		Listener edit = new Listener(201,this,data,display,day,month,year);
+		Listener delete = new Listener(300,this,data,display, day,month,year);
 
-		EditEvent.addActionListener(add);
-		DeleteEvent.addActionListener(cancel);
+		EditEvent.addActionListener(edit);
+		DeleteEvent.addActionListener(delete);
 	}
 
 	public int GetDay()

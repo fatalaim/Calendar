@@ -10,7 +10,10 @@ public class CalendarEventDisplay extends JFrame{
 		this.setTitle("Events");
 						
 		int count = Data.GetCount(day, month + 1, year);
-		this.setSize(250, count * 100);
+		if(count != 0)
+			this.setSize(250, count * 100);
+		else
+			this.setSize(250,100);
 		JPanel eventPanel = new JPanel();
 		eventPanel.setLayout(new GridLayout(count, 1));
 		JButton[] events = new JButton[count];
@@ -19,7 +22,7 @@ public class CalendarEventDisplay extends JFrame{
 		for(int i = 0; i < count; i++)
 		{
 			events[i] = new JButton();
-			edit[i] = new Listener(200,e[i], Data);
+			edit[i] = new Listener(200,e[i], Data, this, day, month, year);
 			String label = String.format("<html>%s<br>%s<br>%d:%d<p></html>", e[i].GetName(), e[i].GetLocation(), e[i].GetTimeHour(), e[i].GetTimeMinute());
 			events[i].setText(label);
 			events[i].setHorizontalAlignment(SwingConstants.CENTER);

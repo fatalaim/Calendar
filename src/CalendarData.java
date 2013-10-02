@@ -100,8 +100,8 @@ public class CalendarData {
 				e[i].SetName(rs.getString(2));
 				e[i].SetLocation(rs.getString(3));
 				e[i].SetDesc(rs.getString(4));
-				e[i].SetDay(rs.getInt(5));
-				e[i].SetMonth(rs.getInt(6));
+				e[i].SetDay(rs.getInt(6));
+				e[i].SetMonth(rs.getInt(5));
 				e[i].SetYear(rs.getInt(7));
 				e[i].SetTimeHour(rs.getInt(8));
 				e[i].SetTimeMin(rs.getInt(9));
@@ -121,10 +121,22 @@ public class CalendarData {
 
 	public int UpdateEvent(Event event)
 	{
-		String updateSQL = "";
+		String updateSQL = "update `events` set `name`=?, `location`=?, `desc`=?, `month`=?, `day`=?, `year`=?, `hour`=?, `minute`=?, `duration`=? where `guid`=?;";
 		try
 		{
-			PreparedStatement preparedStatement = con.prepareStatement(updateSQL);
+			PreparedStatement ps = con.prepareStatement(updateSQL);
+			ps.setString(1, event.GetName());
+			ps.setString(2, event.GetLocation());
+			ps.setString(3, event.GetDesc());
+			ps.setInt(4, event.GetMonth());
+			ps.setInt(5, event.GetDay());
+			ps.setInt(6, event.GetYear());
+			ps.setInt(7, event.GetTimeHour());
+			ps.setInt(8, event.GetTimeMinute());
+			ps.setFloat(9, event.GetDuration());
+			ps.setInt(10, event.GetGUID());
+			int rs = ps.executeUpdate();
+			return rs;
 		}
 		catch(SQLException ex)
 		{
@@ -133,7 +145,25 @@ public class CalendarData {
 			System.out.println("VendorError: " + ex.getErrorCode());
 			return 0;
 		}
-		return 1;
+	}
+	
+	public int DeleteEvent(int guid)
+	{
+		String deleteSQL = "delete from `events` where `guid` = ?;";
+		try
+		{
+			PreparedStatement ps = con.prepareStatement(deleteSQL);
+			ps.setInt(1, guid);
+			int rs = ps.executeUpdate();
+			return rs;
+		}
+		catch(SQLException ex)
+		{
+			System.out.println("SQLException: " + ex.getMessage());
+			System.out.println("SQLState: " + ex.getSQLState());
+			System.out.println("VendorError: " + ex.getErrorCode());
+			return 0;
+		}
 	}
 }
 

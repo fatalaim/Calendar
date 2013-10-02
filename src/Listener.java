@@ -9,8 +9,10 @@ public class Listener implements ActionListener{
 	private CalendarGUI gui;
 	private CalendarAddGUI addGui;
 	private CalendarEditGUI editGui;
+	private CalendarEventDisplay Display;
 	private JButton dayGui;
 	private Event event;
+	private int day;
 	private int month;
 	private int year;
 	
@@ -28,18 +30,26 @@ public class Listener implements ActionListener{
 		addGui = GUI;
 	}
 	
-	public Listener(int button, Event _event, CalendarData Data)
+	public Listener(int button, Event _event, CalendarData Data, CalendarEventDisplay display, int Day, int Month, int Year)
 	{
 		num = button;
 		data = Data;
 		event = _event;
+		Display = display;
+		day = Day;
+		month = Month;
+		year = Year;
 	}
 	
-	public Listener(int button, CalendarEditGUI GUI, CalendarData Data)
+	public Listener(int button, CalendarEditGUI GUI, CalendarData Data, CalendarEventDisplay display, int Day, int Month, int Year)
 	{
 		num = button;
 		editGui = GUI;
 		data = Data;
+		Display = display;
+		day = Day;
+		month = Month;
+		year = Year;
 	}
 	
 	public Listener(int button, JButton day, int Month, int Year, CalendarData Data)
@@ -59,23 +69,36 @@ public class Listener implements ActionListener{
 				new CalendarAddGUI(data);
 				break;
 			case 200: //change event
-				new CalendarEditGUI(data, event);
+				new CalendarEditGUI(data, event, Display,day,month,year);
 				break;
 			case 201: //edit
 				Event eventEdit = new Event();
-				eventEdit.SetDay(addGui.GetDay());
-				eventEdit.SetMonth(addGui.GetMonth());
-				eventEdit.SetYear(addGui.GetYear());
-				eventEdit.SetDesc(addGui.GetDesc());
-				eventEdit.SetDuration(addGui.GetDuration());
-				eventEdit.SetLocation(addGui.GetLocation());
-				eventEdit.SetName(addGui.GetName());
-				eventEdit.SetTimeHour(addGui.GetTimeHour());
-				eventEdit.SetTimeMin(addGui.GetTimeMin());
+				eventEdit.SetDay(editGui.GetDay());
+				eventEdit.SetMonth(editGui.GetMonth());
+				eventEdit.SetYear(editGui.GetYear());
+				eventEdit.SetDesc(editGui.GetDesc());
+				eventEdit.SetDuration(editGui.GetDuration());
+				eventEdit.SetLocation(editGui.GetLocation());
+				eventEdit.SetName(editGui.GetName());
+				eventEdit.SetTimeHour(editGui.GetTimeHour());
+				eventEdit.SetTimeMin(editGui.GetTimeMin());
 				eventEdit.SetGUID(editGui.GetGUID());
-				data.UpdateEvent(eventEdit);
+				int rs = data.UpdateEvent(eventEdit);
+				if(rs == 1)
+				{
+					editGui.setVisible(false);
+					Display.setVisible(false);
+					Display = new CalendarEventDisplay(day, month, year, data);
+				}
 				break;
 			case 300: //delete
+				int rsd = data.DeleteEvent(editGui.GetGUID());
+				if(rsd == 1)
+				{
+					editGui.setVisible(false);
+					Display.setVisible(false);
+					Display = new CalendarEventDisplay(day, month, year, data);
+				}
 				break;
 			case 400: //next
 				if(gui.GetMonth() == 11)
@@ -110,6 +133,7 @@ public class Listener implements ActionListener{
 				_event.SetTimeHour(addGui.GetTimeHour());
 				_event.SetTimeMin(addGui.GetTimeMin());
 				data.Add(_event);
+				addGui.setVisible(false);
 				break;
 			case 700: //cancel add
 				addGui.setVisible(false);
