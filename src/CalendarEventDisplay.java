@@ -23,7 +23,11 @@ public class CalendarEventDisplay extends JFrame{
 		{
 			events[i] = new JButton();
 			edit[i] = new Listener(200,e[i], Data, this, day, month, year);
-			String label = String.format("<html>%s<br>%s<br>%d:%d<p></html>", e[i].GetName(), e[i].GetLocation(), e[i].GetTimeHour(), e[i].GetTimeMinute());
+			String label;
+			if(e[i].GetTimeMinute() != 0)
+				label = String.format("<html>%s<br>%s<br>%d:%d<p></html>", e[i].GetName(), e[i].GetLocation(), e[i].GetTimeHour(), e[i].GetTimeMinute());
+			else
+				label = String.format("<html>%s<br>%s<br>%d:%d0<p></html>", e[i].GetName(), e[i].GetLocation(), e[i].GetTimeHour(), e[i].GetTimeMinute());
 			events[i].setText(label);
 			events[i].setHorizontalAlignment(SwingConstants.CENTER);
 			events[i].addActionListener(edit[i]);

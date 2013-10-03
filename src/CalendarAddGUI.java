@@ -47,18 +47,24 @@ public class CalendarAddGUI extends JFrame{
 	public int GetDay()
 	{
 		JTextField j = (JTextField)inputs[1][1];
+		if(j.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(j.getText());
 	}
 	
 	public int GetMonth()
 	{
 		JTextField j = (JTextField)inputs[2][1];
+		if(j.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(j.getText());
 	}
 	
 	public int GetYear()
 	{
 		JTextField j = (JTextField)inputs[3][1];
+		if(j.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(j.getText());
 	}
 	
@@ -83,18 +89,24 @@ public class CalendarAddGUI extends JFrame{
 	public int GetTimeMin()
 	{
 		JTextField j = (JTextField)inputs[6][1];
+		if(j.getText().isEmpty())
+			return -1;
 		return Integer.parseInt(j.getText());
 	}
 	
 	public int GetTimeHour()
 	{
 		JTextField j = (JTextField)inputs[5][1];
+		if(j.getText().isEmpty())
+			return -1;
 		return Integer.parseInt(j.getText());
 	}
 	
 	public float GetDuration()
 	{
 		JTextField j = (JTextField)inputs[7][1];
+		if(j.getText().isEmpty())
+			return -1;
 		return Float.parseFloat(j.getText());
 	}
 }

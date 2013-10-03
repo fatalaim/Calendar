@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.Calendar;
 
 
 public class CalendarData {
@@ -164,6 +165,31 @@ public class CalendarData {
 			System.out.println("VendorError: " + ex.getErrorCode());
 			return 0;
 		}
+	}
+	
+	public int ErrorCheck(Event event)
+	{
+		if(event.GetName().isEmpty())
+			return 0;
+		if(event.GetDay() <= 0 || event.GetDay() > 31)
+			return 0;
+		if(event.GetDesc().isEmpty())
+			return 0;
+		if(event.GetDuration() < 0)
+			return 0;
+		if(event.GetGUID() < 0)
+			return 0;
+		if(event.GetLocation().isEmpty())
+			return 0;
+		if(event.GetMonth() < 0 || event.GetMonth() > 12)
+			return 0;
+		if(event.GetTimeHour() < 0 || event.GetTimeHour() > 24)
+			return 0;
+		if(event.GetTimeMinute() < 0 || event.GetTimeMinute() > 59)
+			return 0;
+		if(event.GetYear() < Calendar.getInstance().get(Calendar.YEAR))
+			return 0;
+		return 1;
 	}
 }
 

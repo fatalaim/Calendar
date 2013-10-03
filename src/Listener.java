@@ -1,6 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class Listener implements ActionListener{
 	
@@ -83,13 +84,23 @@ public class Listener implements ActionListener{
 				eventEdit.SetTimeHour(editGui.GetTimeHour());
 				eventEdit.SetTimeMin(editGui.GetTimeMin());
 				eventEdit.SetGUID(editGui.GetGUID());
-				int rs = data.UpdateEvent(eventEdit);
-				if(rs == 1)
+				
+				int error = data.ErrorCheck(eventEdit);
+				if(error == 1)
 				{
-					editGui.setVisible(false);
-					Display.setVisible(false);
-					Display = new CalendarEventDisplay(day, month, year, data);
+					int rs = data.UpdateEvent(eventEdit);
+					if(rs == 1)
+					{
+						editGui.setVisible(false);
+						Display.setVisible(false);
+						Display = new CalendarEventDisplay(day, month, year, data);
+					}
 				}
+				else
+				{
+					JOptionPane.showMessageDialog(editGui, "Error in given data.");
+				}
+				
 				break;
 			case 300: //delete
 				int rsd = data.DeleteEvent(editGui.GetGUID());
@@ -132,8 +143,19 @@ public class Listener implements ActionListener{
 				_event.SetName(addGui.GetName());
 				_event.SetTimeHour(addGui.GetTimeHour());
 				_event.SetTimeMin(addGui.GetTimeMin());
-				data.Add(_event);
-				addGui.setVisible(false);
+				
+				int errorAdd = data.ErrorCheck(_event);
+				if(errorAdd == 1)
+				{
+					data.Add(_event);
+					addGui.setVisible(false);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(addGui, "Error in given data.");
+				}
+				
+				
 				break;
 			case 700: //cancel add
 				addGui.setVisible(false);

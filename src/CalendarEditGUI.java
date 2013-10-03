@@ -76,16 +76,22 @@ public class CalendarEditGUI extends JFrame{
 
 	public int GetDay()
 	{
+		if(fields[1].getText().isEmpty())
+			return 0;
 		return Integer.parseInt(fields[1].getText());
 	}
 	
 	public int GetMonth()
 	{
+		if(fields[2].getText().isEmpty())
+			return 0;
 		return Integer.parseInt(fields[2].getText());
 	}
 	
 	public int GetYear()
 	{
+		if(fields[3].getText().isEmpty())
+			return 0;
 		return Integer.parseInt(fields[3].getText());
 	}
 	
@@ -106,16 +112,22 @@ public class CalendarEditGUI extends JFrame{
 	
 	public int GetTimeMin()
 	{
+		if(fields[6].getText().isEmpty())
+			return -1;
 		return Integer.parseInt(fields[6].getText());
 	}
 	
 	public int GetTimeHour()
 	{
+		if(fields[5].getText().isEmpty())
+			return -1;
 		return Integer.parseInt(fields[5].getText());
 	}
 	
 	public float GetDuration()
 	{
+		if(fields[7].getText().isEmpty())
+			return -1;
 		return Float.parseFloat(fields[7].getText());
 	}
 	
